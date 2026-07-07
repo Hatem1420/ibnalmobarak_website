@@ -394,10 +394,27 @@ function renderMini(containerId, list, emptyMsg) {
   `).join("");
 }
 
+function getImageUrl(url) {
+  if (!url) return "";
+
+  // Google Drive shared link
+  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (match) {
+    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1200`;
+    // Alternatively:
+    //return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+
+  // Already a normal image URL
+  return url;
+}
+
+
 // ── MODAL ─────────────────────────────────────────────────────
 function openProgramModal(id) {
   const p = ALL_PROGRAMS.find(x => x.id === id);
   if (!p) return;
+
 
   document.getElementById("modal-title").textContent = p.title;
   document.getElementById("modal-body").innerHTML = `
@@ -409,15 +426,21 @@ function openProgramModal(id) {
       ${p.platform ? `<span class="badge badge-platform"><i class="ti ${platformIcon(p.platform)}" style="font-size:11px"></i> ${escapeHtml(p.platform)}</span>` : ""}
       ${p.points ? `<span class="badge badge-points"><i class="ti ti-star" style="font-size:11px"></i> ${escapeHtml(p.points)} نقطة</span>` : ""}
     </div>
-
-    ${p.youtubeId ? `
+  
+  ${p.youtubeId ? !p.youtubeId.includes('drive.google') ? `
     <div class="modal-section">
       <h4><i class="ti ti-brand-youtube"></i> فيديو تعريفي</h4>
       <div class="video-wrap">
         <iframe src="https://www.youtube.com/embed/${p.youtubeId}" title="${escapeHtml(p.title)}"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
-    </div>` : ""}
+    </div>` : `
+    <div class="modal-image">
+  <img src="${getImageUrl(p.youtubeId)}"
+       alt="${escapeHtml(p.title)}"
+       loading="lazy">
+       ${getImageUrl(p.youtubeId)}
+  </div>` : ""}
 
     <div class="modal-section">
       <h4><i class="ti ti-info-circle"></i> شرح البرنامج</h4>

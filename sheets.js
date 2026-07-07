@@ -66,6 +66,9 @@ const SheetsAPI = (() => {
       const m = v.match(p);
       if (m) return m[1];
     }
+    if (raw.includes('drive.google')) {
+      return raw;
+    }
     return "";
   }
 
