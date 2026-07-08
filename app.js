@@ -183,18 +183,10 @@ function renderEmpty(containerId, message) {
 // (SWIPER_GID) when configured; otherwise it falls back to the same
 // is_new programs, using their preview_url image when available.
 function renderHome() {
-  const newItems = ALL_PROGRAMS.filter(p => p.isNew);
+  const newItems = ALL_PROGRAMS.filter(p => p.stage == 'all');
   const swiperItems = (SWIPER_ITEMS && SWIPER_ITEMS.length)
     ? SWIPER_ITEMS
-    : newItems.map(p => ({
-        title: p.title,
-        date: p.date,
-        time: p.time,
-        points: p.points,
-        programId: p.id,
-        preview: p.preview,
-        type: p.type,
-      }));
+    : [];
   renderHomeSwiper(swiperItems);
   renderHomeGrid(newItems);
 }
