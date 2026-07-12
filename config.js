@@ -29,7 +29,8 @@ window.SITE_CONFIG = {
   // ── Looker Studio ──────────────────────────────────────────────
   // من تقرير Looker Studio: مشاركة (Share) ← تضمين تقرير (Embed report) ← انسخ الرابط من src
   // From your Looker Studio report: Share → Embed report → copy the src URL
-  LOOKER_STUDIO_EMBED_URL: "https://lookerstudio.google.com/embed/reporting/REPORT_ID/page/PAGE_ID",
+  LOOKER_STUDIO_EMBED_URL: "https://datastudio.google.com/embed/reporting/c3f056af-1132-4af4-91ce-f403acca3dd0/page/YN32F",
+  
 
   // ── إعدادات عامة General ──────────────────────────────────────
   // كل كم دقيقة يُعاد تحميل البيانات تلقائياً من الشيت (0 = تعطيل التحديث التلقائي)
