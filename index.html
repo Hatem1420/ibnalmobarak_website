@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.14.0/dist/tabler-icons.min.css">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="LOGO.png">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" type="image/png" href="assets/LOGO.png">
 <script>
   if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -25,7 +25,7 @@
   <div class="topbar-inner">
     <a class="logo-wrap fade-in-up" href="#" style="animation-delay: 0.1s">
       <div class="logo-icon">
-        <img src="LOGO.png" alt="Home" style="width: 20px; height: 30px; vertical-align: middle;">
+        <img src="assets/LOGO.png" alt="Home" style="width: 20px; height: 30px; vertical-align: middle;">
       </i></div>
       <div class="logo-text">
         <h1>منصة البرامج المساندة</h1>
@@ -33,13 +33,13 @@
       </div>
     </a>
     <nav class="nav fade-in-up" style="animation-delay: 0.2s">
-      <button class="nav-btn active" onclick="showSection('home', this)">
+      <button class="nav-btn active" data-section="home">
         <i class="ti ti-home" aria-hidden="true"></i><span>الرئيسية</span>
       </button>
-      <button class="nav-btn" onclick="showSection('stages', this)">
+      <button class="nav-btn" data-section="stages">
         <i class="ti ti-school" aria-hidden="true"></i><span>المراحل</span>
       </button>
-      <button class="nav-btn" onclick="showSection('grades', this)">
+      <button class="nav-btn" data-section="grades">
         <i class="ti ti-medal" aria-hidden="true"></i><span>مصرف النقاط</span>
       </button>
       <button class="nav-btn theme-toggle" id="theme-toggle" aria-label="تبديل الوضع الليلي">
@@ -53,7 +53,7 @@
 <section id="sec-home" class="main-content">
 
   <div class="hero">
-    <div class="fade-in-up" style="animation-delay: 0.2s;"><img src="LOGO.png" alt="Home" style="height: 200px; vertical-align: middle;"></div>
+    <div class="fade-in-up" style="animation-delay: 0.2s;"><img src="assets/LOGO.png" alt="Home" style="height: 200px; vertical-align: middle;"></div>
     <div class="hero-badge fade-in-up" style="animation-delay: 0.1s">بسم الله الرحمن الرحيم</div>
     <h2 class="fade-in-up" style="animation-delay: 0.2s">منصة البرامج المساندة</h2>
     <p class="fade-in-up" style="animation-delay: 0.3s">منصة متكاملة للبرامج القرآنية والتربوية والمهارية لجميع المراحل</p>
@@ -100,10 +100,10 @@
     <div id="stages-status" class="data-status loading"></div>
 
     <div class="stage-tabs fade-in-up" style="animation-delay: 0.2s">
-      <button class="stage-tab active" onclick="setStage('secondary', this)"><i class="ti ti-school" aria-hidden="true"></i> الثانوية</button>
-      <button class="stage-tab" onclick="setStage('middle', this)"><i class="ti ti-building" aria-hidden="true"></i> المتوسطة</button>
-      <button class="stage-tab" onclick="setStage('upper-primary', this)"><i class="ti ti-books" aria-hidden="true"></i> الابتدائية العليا</button>
-      <button class="stage-tab" onclick="setStage('lower-primary', this)"><i class="ti ti-star" aria-hidden="true"></i> الابتدائية الأولية</button>
+      <button class="stage-tab active" data-stage="secondary"><i class="ti ti-school" aria-hidden="true"></i> الثانوية</button>
+      <button class="stage-tab" data-stage="middle"><i class="ti ti-building" aria-hidden="true"></i> المتوسطة</button>
+      <button class="stage-tab" data-stage="upper-primary"><i class="ti ti-books" aria-hidden="true"></i> الابتدائية العليا</button>
+      <button class="stage-tab" data-stage="lower-primary"><i class="ti ti-star" aria-hidden="true"></i> الابتدائية الأولية</button>
     </div>
 
     <div class="timeline-label"><i class="ti ti-clock" aria-hidden="true"></i> البرامج الجارية</div>
@@ -128,7 +128,7 @@
       </div>
     </div> -->
 
-    <div class="section-header">
+    <div class="section-header fade-in-up" style="animation-delay: 0.2s">
       <div class="section-icon"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
       <div class="section-header-text">
         <div class="section-title">مصرف النقاط</div>
@@ -182,11 +182,11 @@
 </footer>
 
 <!-- ══════════════════ MODAL ══════════════════ -->
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+<div class="overlay" id="overlay">
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-head">
       <div class="modal-head-title" id="modal-title">تفاصيل البرنامج</div>
-      <button class="modal-close" onclick="closeModal()" aria-label="إغلاق"><i class="ti ti-x"></i></button>
+      <button class="modal-close" aria-label="إغلاق"><i class="ti ti-x"></i></button>
     </div>
     <div class="modal-body" id="modal-body">
       <img src="https://drive.google.com/file/d/10eeulHOCUsiuqlcn3vRE2lqH4ActcGIa/view?usp=sharing" alt="">
@@ -195,14 +195,13 @@
 </div>
 
 <!-- ══════════════════ LIGHTBOX (fullscreen swiper image) ══════════════════ -->
-<div class="lightbox-overlay" id="lightbox-overlay" onclick="if(event.target===this)closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()" aria-label="إغلاق"><i class="ti ti-x"></i></button>
+<div class="lightbox-overlay" id="lightbox-overlay">
+  <button class="lightbox-close" aria-label="إغلاق"><i class="ti ti-x"></i></button>
   <img class="lightbox-img" id="lightbox-img" src="" alt="">
 </div>
 
 
-<script src="config.js"></script>
-<script src="sheets.js"></script>
-<script src="app.js"></script>
+<script src="js/config.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
